@@ -15137,6 +15137,14 @@ def _build_system_prompt(
         except Exception as _mcp_err:
             logger.debug(f"MCP description injection skipped: {_mcp_err}")
 
+    # Fork: answer in the configured language (default Spanish). Applied after
+    # the cached base prompt so changing the setting takes effect immediately.
+    try:
+        from src.prompt_language import with_language
+        agent_prompt = with_language(agent_prompt, get_setting("response_language", ""))
+    except Exception:
+        logger.debug("response-language directive skipped", exc_info=True)
+
     agent_msg = {
         "role": "system",
         "content": agent_prompt,

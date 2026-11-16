@@ -45,6 +45,8 @@ DEFAULT_SETTINGS = {
     # recipients without confirmation.
     "agent_email_confirm": True,
     "image_gen_enabled": False,
+    # Fork: language the assistant answers in ("" = ODYSSEUS_LANGUAGE / "es"; "en"/"auto" = upstream behaviour)
+    "response_language": "",
     "image_model": "",
     "image_edit_model": "",
     "image_quality": "medium",
