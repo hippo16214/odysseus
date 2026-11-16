@@ -106,11 +106,11 @@ function handle(text, node, anc, file, isTpl) {
 
 function scanHtml(file) {
   const src = fs.readFileSync(path.join(repo, file), 'utf8');
-  for (const m of src.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+  for (const m of src.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi)) {
     if (/\bsrc=/.test(m[1])) continue;
     scanJs(m[2], file);
   }
-  fromMarkup(src.replace(/<script\b[\s\S]*?<\/script>/gi, ' '), file, 'html');
+  fromMarkup(src.replace(/<script\b[\s\S]*?<\/script\b[^>]*>/gi, ' '), file, 'html');
 }
 
 function listJs(dir) {
