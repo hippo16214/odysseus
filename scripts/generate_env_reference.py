@@ -353,6 +353,11 @@ VARIABLE_NOTES: dict[str, tuple[str, str, str]] = {
         "Password for the admin account created on first run. Setup refuses a value "
         "shorter than its minimum length rather than silently falling back.",
     ),
+    "ODYSSEUS_LANGUAGE": (
+        "Deployment and first run", USER,
+        "Default language the assistant replies in (es, fr or en to disable the "
+        "directive) when the response_language setting is empty. Defaults to es.",
+    ),
     "ODYSSEUS_SKIP_ADMIN_PROMPT": (
         "Deployment and first run", USER,
         "Any non-empty value suppresses the interactive admin-credential prompt even "

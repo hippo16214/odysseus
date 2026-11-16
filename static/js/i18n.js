@@ -327,6 +327,12 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ response_language: next })
             }).catch(function () { /* non-admin or offline: UI language still changes */ })
+              .then(function () {
+                // Drop the shared settings snapshot before the page reloads.
+                return import('/static/js/appConfig.js')
+                  .then(function (m) { m.invalidateSettings(); })
+                  .catch(function () { /* cache module unavailable: reload clears it anyway */ });
+              })
               .then(function () { setLang(next); });
           } catch (e) { setLang(next); }
         });
