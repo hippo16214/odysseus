@@ -25,6 +25,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      # The build script prefers .venv; without it `py` picks the newest
+      # Python on the runner (3.15), for which some dependencies have no wheels.
+      - name: Create Python 3.11 venv
+        shell: powershell
+        run: python -m venv .venv
+
       - name: Build portable exe
         shell: powershell
         run: powershell -ExecutionPolicy Bypass -File .\build-windows-portable.ps1
